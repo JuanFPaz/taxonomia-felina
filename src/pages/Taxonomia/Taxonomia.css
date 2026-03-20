@@ -1,0 +1,212 @@
+/* RESET básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* FONDO GENERAL */
+body {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #e2e8f0;
+}
+
+/* CONTENEDOR PRINCIPAL */
+div {
+  padding: 20px;
+}
+
+/* ========================= */
+/* 🐱 FAMILIA */
+/* ========================= */
+
+.familia {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 25px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.familia h1 {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.familia h2 {
+  margin: 15px 0;
+  font-size: 18px;
+  color: #94a3b8;
+}
+
+.listaFamilia {
+  list-style: none;
+}
+
+.itemFamilia {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================= */
+/* 🧬 SUBFAMILIA */
+/* ========================= */
+
+.subfamilia-container {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.data-subfamilia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.listaSubfamilia {
+  list-style: none;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 12px;
+}
+
+.itemSubfamilia {
+  font-weight: bold;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* niveles */
+.listaGenero,
+.listaEspecie,
+.listaSubespecie {
+  list-style: none;
+}
+
+.itemGenero,
+.itemEspecie,
+.itemSubEspecie{
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========================= */
+/* 🧾 FORMULARIO */
+/* ========================= */
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-subfamilia {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* BLOQUES */
+.input {
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* TÍTULOS */
+.input h2 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #38bdf8;
+}
+
+/* INPUTS */
+input[type='text'] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  margin: 5px 0 10px 0;
+  background: #1e293b;
+  color: white;
+}
+
+input:focus {
+  outline: 2px solid #38bdf8;
+}
+
+/* RADIO */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+/* CHECKBOX */
+label {
+  display: block;
+  margin-top: 8px;
+}
+
+/* ========================= */
+/* 🔘 BOTONES */
+/* ========================= */
+
+button {
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #38bdf8;
+  color: black;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #0ea5e9;
+}
+
+/* botón delete */
+button.delete {
+  background: #ef4444;
+  color: white;
+}
+
+button.delete:hover {
+  background: #dc2626;
+}
+
+/* contenedor botones */
+.button {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* acciones finales */
+#guardar {
+  background: #22c55e;
+  margin-right: 10px;
+}
+
+#cancelar {
+  background: #64748b;
+}
+
+/* no data */
+.no-data {
+  opacity: 0.6;
+  font-style: italic;
+}
+
