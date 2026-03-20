@@ -1,32 +1,25 @@
-import { useState, useEffect } from "react"
-import type {  PropsFormulario,  PropsInputGenero,  PropsInputEspecie,  PropsInputSubEspecie } from "../../../../types/propsTypes"
-
+import { useState, useEffect } from 'react'
+import type { PropsFormulario, PropsInputGenero, PropsInputEspecie, PropsInputSubEspecie } from '../../../../types/propsTypes'
+import { createInput, deleteInput, mapeo } from '../../../../utils/callbackEffects'
+import type { Nomenclatura, NomenclaturaEspecie, NomenclaturaGenero } from '../../../../model/Gatos'
 
 export default function Formulario({ dataEdit, onSubmit, onClick }: PropsFormulario) {
   const [dinamico, setDinamico] = useState([1])
 
-  console.log(dataEdit)
   useEffect(() => {
     if (dataEdit) {
-      const count = dataEdit.Generos.map((g, idx) => {
-        return idx + 1
-      })
+      const count = mapeo<NomenclaturaGenero>(dataEdit.Generos)
       setDinamico(count)
     }
   }, [])
 
   function handleDinamicInput(event: React.MouseEvent<HTMLButtonElement>) {
-    if (event.currentTarget.id === 'create') {
-      const nuevoArreglo = [...dinamico]
-      const indice = nuevoArreglo.length - 1
-      const valueState = nuevoArreglo[indice]
-      nuevoArreglo.push(valueState + 1)
-      setDinamico(nuevoArreglo)
-    } else if (event.currentTarget.id === 'delete') {
-      const nuevoArreglo = [...dinamico]
-      const ultimoElemento = nuevoArreglo.pop()
-      setDinamico(nuevoArreglo)
-    }
+    createInput(event.currentTarget.id,'create',dinamico,(estado)=>{
+      setDinamico(estado)
+    })
+    deleteInput(event.currentTarget.id,'delete',dinamico,(estado)=>{
+      setDinamico(estado)
+    })
   }
 
   return (
@@ -71,25 +64,18 @@ function InputGenero({ data, dataEdit }: PropsInputGenero) {
   const [dinamicoDos, setDinamicoDos] = useState([1])
   useEffect(() => {
     if (dataEdit) {
-      const count = dataEdit.especies.map((g, idx) => {
-        return idx + 1
-      })
+      const count = mapeo<NomenclaturaEspecie>(dataEdit.especies)
       setDinamicoDos(count)
     }
   }, [])
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    if (event.currentTarget.id === 'create-especie') {
-      const nuevoArreglo = [...dinamicoDos]
-      const indice = nuevoArreglo.length - 1
-      const valueState = nuevoArreglo[indice]
-      nuevoArreglo.push(valueState + 1)
-      setDinamicoDos(nuevoArreglo)
-    } else if (event.currentTarget.id === 'delete-especie') {
-      const nuevoArreglo = [...dinamicoDos]
-      const ultimoElemento = nuevoArreglo.pop()
-      setDinamicoDos(nuevoArreglo)
-    }
+    createInput(event.currentTarget.id, 'create-especie', dinamicoDos, (estado) => {
+      setDinamicoDos(estado)
+    })
+    deleteInput(event.currentTarget.id, 'delete-especie', dinamicoDos, (estado) => {
+      setDinamicoDos(estado)
+    })
   }
 
   return (
@@ -115,37 +101,29 @@ function InputGenero({ data, dataEdit }: PropsInputGenero) {
 function InputEspecies({ data, dataEdit, herencia }: PropsInputEspecie) {
   const [dinamicoTres, setDinamicoTres] = useState([1])
   const [flagBox, setFlagBox] = useState(false)
-  const [clave, setClave] = useState(`${herencia}-${data}`)
+  let clave: string = `${herencia}-${data}`
 
   useEffect(() => {
     if (dataEdit?.subespecie) {
-      const count = dataEdit.subespecie?.map((g, idx) => {
-        return idx + 1
-      })
+      const count = mapeo<Nomenclatura>(dataEdit.subespecie)
       setFlagBox(true)
       setDinamicoTres(count)
     }
   }, [])
 
-  function handleChangeBox(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleChangeBox() {
     const fl = !flagBox
     setFlagBox(fl)
   }
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    if (event.currentTarget.id === 'create-subespecie') {
-      const nuevoArreglo = [...dinamicoTres]
-      const indice = nuevoArreglo.length - 1
-      const valueState = nuevoArreglo[indice]
-      nuevoArreglo.push(valueState + 1)
-      setDinamicoTres(nuevoArreglo)
-    } else if (event.currentTarget.id === 'delete-subespecie') {
-      const nuevoArreglo = [...dinamicoTres]
-      const ultimoElemento = nuevoArreglo.pop()
-      setDinamicoTres(nuevoArreglo)
-    }
+    createInput(event.currentTarget.id, 'create-especie', dinamicoTres, (estado) => {
+      setDinamicoTres(estado)
+    })
+    deleteInput(event.currentTarget.id, 'delete-especie', dinamicoTres, (estado) => {
+      setDinamicoTres(estado)
+    })
   }
-
   return (
     <div className='input input-especie'>
       <h2>Especie de Subfamilia {clave}</h2>
@@ -176,7 +154,8 @@ function InputEspecies({ data, dataEdit, herencia }: PropsInputEspecie) {
 }
 
 function InputSubespecies({ data, dataEdit, herencia }: PropsInputSubEspecie) {
-  const [clave, setClave] = useState(`${herencia}-${data}`)
+  let clave: string = `${herencia}-${data}`
+
   return (
     <div className='input input-subespecie'>
       <h2>Subespecie de Subfamilia {clave}</h2>

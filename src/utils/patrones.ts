@@ -1,7 +1,7 @@
 const patron1: RegExp = /genero-cientifica-(\d+)/
-const patroncientifico: RegExp = /especie-cientifica-(\d+)-(\d+)/
-const patroncomun: RegExp = /especie-comun-(\d+)-(\d+)/
-const patron3: RegExp = /subespecie-cientifica-(\d+)-(\d+)-(\d+)/
+// const patroncientifico: RegExp = /especie-cientifica-(\d+)-(\d+)/
+// const patroncomun: RegExp = /especie-comun-(\d+)-(\d+)/
+// const patron3: RegExp = /subespecie-cientifica-(\d+)-(\d+)-(\d+)/
 
 const objeto = {
   'genero-cientifica-1': 'Panthera',
