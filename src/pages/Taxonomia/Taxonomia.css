@@ -83,12 +83,13 @@ div {
 .listaGenero,
 .listaEspecie,
 .listaSubespecie {
+  padding: 0 18px;
   list-style: none;
 }
 
 .itemGenero,
 .itemEspecie,
-.itemSubEspecie{
+.itemSubEspecie {
   padding: 8px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -209,4 +210,3 @@ button.delete:hover {
   opacity: 0.6;
   font-style: italic;
 }
-

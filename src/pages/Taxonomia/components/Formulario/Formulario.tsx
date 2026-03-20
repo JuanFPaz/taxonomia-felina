@@ -5,8 +5,8 @@ import type {  PropsFormulario,  PropsInputGenero,  PropsInputEspecie,  PropsInp
 export default function Formulario({ dataEdit, onSubmit, onClick }: PropsFormulario) {
   const [dinamico, setDinamico] = useState([1])
 
+  console.log(dataEdit)
   useEffect(() => {
-    console.log()
     if (dataEdit) {
       const count = dataEdit.Generos.map((g, idx) => {
         return idx + 1
@@ -70,7 +70,6 @@ export default function Formulario({ dataEdit, onSubmit, onClick }: PropsFormula
 function InputGenero({ data, dataEdit }: PropsInputGenero) {
   const [dinamicoDos, setDinamicoDos] = useState([1])
   useEffect(() => {
-    console.log()
     if (dataEdit) {
       const count = dataEdit.especies.map((g, idx) => {
         return idx + 1

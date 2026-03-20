@@ -40,9 +40,13 @@ export default function Taxonomia() {
   }
 
   return (
-    <div>
-      <Familia data={data!} />
-      <Subfamilia data={dataSF!} dataEdit={dataEdit!} onSubFamilia={handleCreateUpdateSubFamilia} onEditSubfamilia={handleEditSubfamilia} onDeleteSubFamilia={handleDeleteSubfamilia} />
-    </div>
+    <>
+      {data && (
+        <div>
+          <Familia data={data!} />
+          <Subfamilia data={dataSF!} dataEdit={dataEdit!} onSubFamilia={handleCreateUpdateSubFamilia} onEditSubfamilia={handleEditSubfamilia} onDeleteSubFamilia={handleDeleteSubfamilia} />
+        </div>
+      )}
+    </>
   )
 }

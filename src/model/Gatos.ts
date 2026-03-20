@@ -174,6 +174,7 @@ export type NomenclaturaEspecie = {
 
 export type FormFelinos = {
   subfamilia?: Nomenclatura
+  id?: string
   generos?: NomenclaturaGenero[]
 }
 
@@ -226,18 +227,23 @@ export default class Gatos {
     }
   }
 
-  static crearFelinos({ subfamilia, generos }: FormFelinos) {
+  static crearFelinos({ subfamilia, generos, id }: FormFelinos, ) {
     const felinos: Felinae = new Felinae()
     felinos.Subfamilia = subfamilia!
     felinos.Generos = generos!
+    if(id){
+      felinos.Id = id
+    }
     this.subFamilias.push(felinos)
-    console.log('se creo un felino')
   }
 
-  static crearPanterinos({ subfamilia, generos }: FormFelinos) {
+  static crearPanterinos({ subfamilia, generos, id }: FormFelinos) {
     const panterinos: Pantherinae = new Pantherinae()
     panterinos.Subfamilia = subfamilia!
     panterinos.Generos = generos!
+    if(id){
+      panterinos.Id = id
+    }
     this.subFamilias.push(panterinos)
     console.log('se creo un panterino')
   }
@@ -257,7 +263,14 @@ export default class Gatos {
     console.log(this.subFamilias)
   }
   static findSubfamiliaById(id: string) {
-    const [unaSubfamilia] = this.subFamilias.filter((sf) => sf.Id === id)
+    const [unaSubfamilia] = this.subFamilias.filter((sf) => {
+      console.log(sf)
+      if(sf.Id === id) {
+        return sf
+      }
+    })
+    console.log(unaSubfamilia);
+    
     return unaSubfamilia
   }
 

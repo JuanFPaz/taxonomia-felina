@@ -13,8 +13,10 @@ export default function Subfamilia({ data, dataEdit, onSubFamilia, onEditSubfami
   }
 
   function handleRenderEditForm(id: string) {
-    handleRenderForm()
+    console.log(id);
+    
     onEditSubfamilia(id)
+    handleRenderForm()
   }
 
   function handleSubmitForm(event: React.SubmitEvent<HTMLFormElement>) {
