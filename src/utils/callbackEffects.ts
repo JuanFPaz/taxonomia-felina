@@ -1,7 +1,10 @@
 export function mapeo<T>(array: T[]): number[] {
+  console.log(array.length)
   let count: number[] = []
   for (let i = 0; i < array.length; i++) {
-    count.push(i)
+    count.push(i + 1)
+    console.log(count);
+    
   }
   return count
 }

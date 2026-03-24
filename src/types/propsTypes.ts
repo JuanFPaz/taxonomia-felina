@@ -1,4 +1,4 @@
-import { type Familia, type NomenclaturaEspecie, type Nomenclatura, type Subfamilias, type FormFelinos, type NomenclaturaGenero } from '../model/Gatos'
+import { type Familia, type NomenclaturaEspecie, type Nomenclatura, type Subfamilias, type NomenclaturaGenero } from '../model/Gatos'
 
 export type PropsFamilia = {
   data: Familia
@@ -6,10 +6,6 @@ export type PropsFamilia = {
 
 export type PropsSubfamilia = {
   data: Subfamilias[]
-  dataEdit?: Subfamilias
-  onSubFamilia: (subfamilia: FormFelinos) => void
-  onEditSubfamilia: (id: string) => void
-  onDeleteSubFamilia: (id: string) => void
 }
 
 export type PropsListaSubfamilia = {
@@ -20,7 +16,7 @@ export type PropsListaSubfamilia = {
 }
 
 export type PropsFormulario = {
-  dataEdit?: Subfamilias
+  data?: Subfamilias
   onClick: () => void
   onSubmit: (event: React.SubmitEvent<HTMLFormElement>) => void
 }

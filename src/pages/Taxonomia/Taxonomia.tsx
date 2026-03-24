@@ -2,49 +2,29 @@ import { useEffect, useState } from 'react'
 import Familia from './components/Familia/Familia'
 import Subfamilia from './components/Subfamilia/Subfamilia'
 import Gatos from '../../model/Gatos'
-import type { FormFelinos } from '../../model/Gatos'
-import type { stateFamilia, stateEditSubfamilia, stateSubfamilias } from '../../types/stateTypes'
+import type { stateTaxonomia } from '../../types/stateTypes'
 import './Taxonomia.css'
 
 export default function Taxonomia() {
-  const [data, setData] = useState<stateFamilia>(null)
-  const [dataSF, setDataSF] = useState<stateSubfamilias>(null)
-  const [dataEdit, setDataEdit] = useState<stateEditSubfamilia>(null)
+  const [tax, setTax] = useState<stateTaxonomia>({ status: 'none' })
 
   useEffect(() => {
-    setData(Gatos.getFamilia())
-    setDataSF(Gatos.getSubFamilias())
+    if (tax.status === 'none') {
+      Gatos.init()
+      const familia = Gatos.getFamilia()
+      const subfamilias = Gatos.getSubFamilias()
+      setTax({ status: 'success', data: { familia, subfamilias } })
+    }
   }, [])
 
-  function handleCreateUpdateSubFamilia(formFelino: FormFelinos) {
-    if (dataEdit) {
-      Gatos.updateSubfamilia(formFelino, dataEdit.Id)
-      Gatos.saveDataLocal()
-      setDataSF(Gatos.getSubFamilias())
-      setDataEdit(null)
-    } else {
-      Gatos.createSubfamilias(formFelino)
-      Gatos.saveDataLocal()
-      setDataSF(Gatos.getSubFamilias())
-    }
-  }
 
-  function handleDeleteSubfamilia(id: string) {
-    Gatos.deleteSubfamilia(id)
-    Gatos.saveDataLocal()
-    setDataSF(Gatos.getSubFamilias())
-  }
-
-  function handleEditSubfamilia(id: string) {
-    setDataEdit(Gatos.findSubfamiliaById(id))
-  }
 
   return (
     <>
-      {data && (
+      {tax.status === 'success' && (
         <div>
-          <Familia data={data!} />
-          <Subfamilia data={dataSF!} dataEdit={dataEdit!} onSubFamilia={handleCreateUpdateSubFamilia} onEditSubfamilia={handleEditSubfamilia} onDeleteSubFamilia={handleDeleteSubfamilia} />
+          <Familia data={tax.data.familia}/>
+          <Subfamilia data={tax.data.subfamilias} />
         </div>
       )}
     </>

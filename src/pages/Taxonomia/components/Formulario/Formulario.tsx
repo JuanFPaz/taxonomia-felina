@@ -3,21 +3,24 @@ import type { PropsFormulario, PropsInputGenero, PropsInputEspecie, PropsInputSu
 import { createInput, deleteInput, mapeo } from '../../../../utils/callbackEffects'
 import type { Nomenclatura, NomenclaturaEspecie, NomenclaturaGenero } from '../../../../model/Gatos'
 
-export default function Formulario({ dataEdit, onSubmit, onClick }: PropsFormulario) {
+export default function Formulario({ data, onSubmit, onClick }: PropsFormulario) {
   const [dinamico, setDinamico] = useState([1])
-
   useEffect(() => {
-    if (dataEdit) {
-      const count = mapeo<NomenclaturaGenero>(dataEdit.Generos)
+    if (data) {
+      const count = mapeo<NomenclaturaGenero>(data.Generos)
       setDinamico(count)
     }
   }, [])
 
+  useEffect(() => {
+    console.log(dinamico)
+  }, [dinamico])
+
   function handleDinamicInput(event: React.MouseEvent<HTMLButtonElement>) {
-    createInput(event.currentTarget.id,'create',dinamico,(estado)=>{
+    createInput(event.currentTarget.id, 'create', dinamico, (estado) => {
       setDinamico(estado)
     })
-    deleteInput(event.currentTarget.id,'delete',dinamico,(estado)=>{
+    deleteInput(event.currentTarget.id, 'delete', dinamico, (estado) => {
       setDinamico(estado)
     })
   }
@@ -30,15 +33,15 @@ export default function Formulario({ dataEdit, onSubmit, onClick }: PropsFormula
           <div className='radio-group'>
             <label>
               Feliane (Felinos)
-              <input type='radio' name='subfamilia' value='Felinae' required defaultChecked={dataEdit?.Subfamilia.cientifica === 'Felinae' ? true : false} />
+              <input type='radio' name='subfamilia' value='Felinae' required defaultChecked={data?.Subfamilia.cientifica === 'Felinae' ? true : false} />
             </label>
             <label>
               Pantherinae (Panterinos)
-              <input type='radio' name='subfamilia' value='Pantherinae' required defaultChecked={dataEdit?.Subfamilia.cientifica === 'Pantherinae' ? true : false} />
+              <input type='radio' name='subfamilia' value='Pantherinae' required defaultChecked={data?.Subfamilia.cientifica === 'Pantherinae' ? true : false} />
             </label>
           </div>
           {dinamico.map((d, idx) => (
-            <InputGenero key={d} dataEdit={dataEdit?.Generos[idx]} data={d} />
+            <InputGenero key={d} dataEdit={data?.Generos[idx]} data={d} />
           ))}
           <div className='button'>
             <button type='button' id='create' onClick={handleDinamicInput}>
@@ -117,10 +120,10 @@ function InputEspecies({ data, dataEdit, herencia }: PropsInputEspecie) {
   }
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    createInput(event.currentTarget.id, 'create-especie', dinamicoTres, (estado) => {
+    createInput(event.currentTarget.id, 'create-subespecie', dinamicoTres, (estado) => {
       setDinamicoTres(estado)
     })
-    deleteInput(event.currentTarget.id, 'delete-especie', dinamicoTres, (estado) => {
+    deleteInput(event.currentTarget.id, 'delete-subespecie', dinamicoTres, (estado) => {
       setDinamicoTres(estado)
     })
   }

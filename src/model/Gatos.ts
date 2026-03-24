@@ -71,34 +71,6 @@ class Felidae {
   set Id(id: string) {
     this.id = id
   }
-
-  descripcion(): string {
-    const message: string = `
-        Los félidos (Felidae), coloquialmente llamados felinos, son una familia de mamíferos placentarios del orden Carnivora. Poseen un cuerpo esbelto, oído agudo, hocico corto y excelente vista. Son los mamíferos cazadores más sigilosos. La mayoría consume exclusivamente carne e ignora cualquier otra comida que no sea una presa viva. La capturan con sus afiladas garras y suelen matarla de un único y tenaz mordisco en la columna vertebral que conecta el cuello de la presa. Son digitígrados.[2]​
-
-        Los félidos tienen algunas de las fibras musculares más potentes jamás estimadas en relación a su tamaño, siendo tres veces más potentes que las fibras musculares de atletas humanos y un 20 % más potentes que las de los ungulados salvajes.[3]​[4]​
-
-        Se les han encontrado genes seleccionados de forma positiva, relacionados a un mayor desarrollo y mineralización óseos, fibras musculares de propiedades contráctiles superiores, síntesis de hormonas esteroides, y crecimiento de axones y su trayectoria.[5]​
-
-        A excepción de los guepardos, todos los félidos pueden retraer las uñas de sus garras dentro de una vaina protectora mientras no las usan.
-
-        Hay alrededor de cuarenta especies en esta familia; muchas de las cuales escasean en la actualidad, porque han sido objeto de caza por su piel, para aprovechar partes de su cuerpo, o porque su hábitat está siendo destruido, como pasa con el lince ibérico (Lynx pardinus), el félido en mayor peligro de extinción.
-
-        Excepto en Antártida, Oceanía y algunas islas, se los encuentra en todo el mundo.\n\nFuente: Wikipedia - https://es.wikipedia.org/wiki/Felidae
-        `
-
-    return message
-  }
-
-  grandesFelidos(): string {
-    const message = `
-        Las cinco especies actuales más grandes de la familia son, por este orden: el tigre, el león, el jaguar, el leopardo, y el puma.
-
-        En general son cazadores rápidos (guepardo: 104 km/h [29 m/s]; tigre: 56 km/h; leopardo: 60 km/h [17 m/s] y león: 74 km/h [20.6 m/s]) y poderosos, capaces de una gran aceleración (guepardo: 12 m/s²; león: 9.5 m/s²)
-        `
-
-    return message
-  }
 }
 
 class Felinae extends Felidae {
@@ -119,14 +91,6 @@ class Felinae extends Felidae {
 
   set Generos(gn: NomenclaturaGenero[]) {
     this.generos = gn
-  }
-
-  ronronear() {
-    return 'Prrrr'
-  }
-
-  maullar() {
-    return 'Miauuu'
   }
 }
 
@@ -149,10 +113,6 @@ class Pantherinae extends Felidae {
 
   set Generos(gn: NomenclaturaGenero[]) {
     this.generos = gn
-  }
-
-  rugir() {
-    return 'Roaaarrr!!'
   }
 }
 export type Familia = Felidae
@@ -227,11 +187,11 @@ export default class Gatos {
     }
   }
 
-  static crearFelinos({ subfamilia, generos, id }: FormFelinos, ) {
+  static crearFelinos({ subfamilia, generos, id }: FormFelinos) {
     const felinos: Felinae = new Felinae()
     felinos.Subfamilia = subfamilia!
     felinos.Generos = generos!
-    if(id){
+    if (id) {
       felinos.Id = id
     }
     this.subFamilias.push(felinos)
@@ -241,36 +201,27 @@ export default class Gatos {
     const panterinos: Pantherinae = new Pantherinae()
     panterinos.Subfamilia = subfamilia!
     panterinos.Generos = generos!
-    if(id){
+    if (id) {
       panterinos.Id = id
     }
     this.subFamilias.push(panterinos)
-    console.log('se creo un panterino')
   }
 
   static updateSubfamilia({ subfamilia, generos }: FormFelinos, id: string) {
-    console.log('Vamo a editarlo')
-
-    console.log(this.subFamilias)
     this.subFamilias.forEach((sf, idx, arr) => {
       if (sf.Id === id) {
         arr[idx].Subfamilia = subfamilia!
         arr[idx].Generos = generos!
       }
     })
-    console.log('Se edito?')
-
-    console.log(this.subFamilias)
   }
   static findSubfamiliaById(id: string) {
     const [unaSubfamilia] = this.subFamilias.filter((sf) => {
-      console.log(sf)
-      if(sf.Id === id) {
+      if (sf.Id === id) {
         return sf
       }
     })
-    console.log(unaSubfamilia);
-    
+
     return unaSubfamilia
   }
 
